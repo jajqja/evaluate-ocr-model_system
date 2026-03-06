@@ -1,4 +1,4 @@
-# OCR Benchmark Suite
+# OCR Model Evaluation system
 
 Đánh giá **WER**, **CER**, **tốc độ (latency)** cho các mô hình OCR dùng HuggingFace Transformers.
 
