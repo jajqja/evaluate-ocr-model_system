@@ -46,8 +46,8 @@ def run_model(samples: list[Sample]) -> ModelSummary:
             metrics = compute_metrics(sample.ground_truth, pred)
             results.append(ModelResult(
                 sample_id=sample.sample_id,
-                prediction=pred[:128] + ("..." if len(pred) > 128 else ""),
-                ground_truth=sample.ground_truth[:128] + ("..." if len(sample.ground_truth) > 128 else ""),
+                prediction=pred,
+                ground_truth=sample.ground_truth,
                 wer=metrics["wer"],
                 cer=metrics["cer"],
                 latency_ms=round(latency_ms, 2),
