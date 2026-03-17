@@ -10,6 +10,7 @@ from models import Sample, ModelResult, ModelSummary
 from dataloader import load_dataset
 from load_model_custom import load_model, infer
 from metrics import compute_metrics
+import os
 
 
 def run_model(samples: list[Sample], output_dir: str) -> ModelSummary:
@@ -145,7 +146,7 @@ def main():
 
     print(f"[Dataset] {len(samples)} samples found")
 
-    summary = run_model(samples)
+    summary = run_model(samples, args.output)
 
     save_result(summary, args.output)
 
