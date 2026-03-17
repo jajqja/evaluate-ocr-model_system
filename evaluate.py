@@ -52,11 +52,14 @@ def run_model(samples: list[Sample], output_dir: str) -> ModelSummary:
                 cer=metrics["cer"],
                 latency_ms=round(latency_ms, 2),
             ))
-            with open(f"{output_dir}/md/{sample.sample_id}.md", "w") as f:
-                f.write("-----Prediction-----")
-                f.write(pred)
-                f.write("\n\n-----Ground Truth-----")
-                f.write(sample.ground_truth)
+            debug_path = os.path.join(output_dir, "debug")
+            os.makedirs(debug_path, exist_ok=True)
+            if metrics["wer"] >= 1 or metrics["cer"] >= 1:
+                with open(f"{output_dir}/debug/{sample.sample_id}.md", "w") as f:
+                    f.write("-----Prediction-----")
+                    f.write(pred)
+                    f.write("\n\n-----Ground Truth-----")
+                    f.write(sample.ground_truth)
             print(f"{prefix} WER={metrics['wer_pct']:5.1f}%  CER={metrics['cer_pct']:5.1f}%  {latency_ms:.0f}ms  {sample.sample_id}")
 
         except Exception as e:
