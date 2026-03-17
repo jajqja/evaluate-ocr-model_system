@@ -55,7 +55,8 @@ def run_model(samples: list[Sample], output_dir: str) -> ModelSummary:
             debug_path = os.path.join(output_dir, "debug")
             os.makedirs(debug_path, exist_ok=True)
             if metrics["wer"] >= 1 or metrics["cer"] >= 1:
-                with open(f"{output_dir}/debug/{sample.sample_id}.md", "w") as f:
+                pure_id = os.path.splitext(sample.sample_id)[0]
+                with open(f"{output_dir}/debug/{pure_id}.md", "w") as f:
                     f.write("-----Prediction-----")
                     f.write(pred)
                     f.write("\n\n-----Ground Truth-----")
